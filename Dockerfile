@@ -13,4 +13,4 @@ RUN pip install --upgrade pip &&  \
 RUN poetry config virtualenvs.create false &&  \
     poetry install --no-ansi --no-dev --no-interaction
 
-COPY src/ usr/app/code
+COPY src .
