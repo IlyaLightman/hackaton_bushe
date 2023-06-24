@@ -2,7 +2,7 @@ version: '3'
 services:
   app:
     build: .
-    command: sh -c "python backend/manage.py migrate && python backend/manage.py runserver"
+    command: sh -c "python backend/manage.py migrate && python backend/manage.py runserver 0.0.0.0:8000"
     container_name: hakaton-app
     depends_on:
       - db

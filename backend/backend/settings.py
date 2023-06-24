@@ -11,7 +11,11 @@ SECRET_KEY = env.str("APP_SECRET_KEY")
 
 DEBUG = env.bool("APP_DEBUG")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "*",
+    "127.0.0.1",
+    "localhost",
+]
 
 # Application definition
 
