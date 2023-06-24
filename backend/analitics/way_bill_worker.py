@@ -29,17 +29,19 @@ class Courier(BaseModel):
 
 
 class WayBill(BaseModel):
-    courier: Courier.id
-    orders: list[Order.id]
+    courier_id: int
+    orders_id: list[int]
 
 
 class WayBillGenerator:
-    def __init__(self, hub_id, active_couriers: List[Courier], optimize_func, metrics_coeff: MetricsCoeff):
+    def __init__(self, hub_id, optimize_func, metrics_coeff: MetricsCoeff):
         self.hub_id: int = hub_id
         self.metrics_coeff = metrics_coeff
         self.optimize_func = optimize_func
         self.G = None
-        self.active_couriers = active_couriers  # todo del
+
+    def _generate_weight(self):
+        pass
 
     def optimize(self) -> List[WayBill]:
         cover_history, cover = self.greedy_max_cover(self.G, self.hub_id)
@@ -52,18 +54,15 @@ class WayBillGenerator:
         return ...
 
     def create_way_bills(self) -> List[WayBill]:
-        G = nx.complete_graph(12)
-        self.G = G
-        for (u, v) in G.edges():
-            G.edges[u, v]['weight'] = random.random()
+        self.generate_graph()
 
-        print("Количество вершин:", G.number_of_nodes())
-        print("Количество ребер:", G.number_of_edges())
+        print("Количество вершин:", self.G.number_of_nodes())
+        print("Количество ребер:", self.G.number_of_edges())
 
         return self.optimize()
 
     def greedy_max_cover(self, graph, start):
-        active_couriers = self._get_active_couriers()
+        active_couriers = WayBillGenerator._get_active_couriers()
 
         cover_history = []
         total_cover = set()
@@ -87,7 +86,8 @@ class WayBillGenerator:
             cover_history.append(visited)
         return cover_history, total_cover
 
-    def _draw_way(self, graph, coverage: list):
+    @staticmethod
+    def _draw_way(graph, coverage: list):
         pos = nx.spring_layout(graph)
         nx.draw(graph, pos, with_labels=True)
         colors = ['r', 'g', 'b', 'y', 'm', 'c', 'k']  # список доступных цветов
@@ -98,5 +98,25 @@ class WayBillGenerator:
 
         plt.show()
 
-    def _get_active_couriers(self) -> List[Courier]:
-        ...
+    @staticmethod
+    def _get_active_couriers() -> List[Courier]:
+        return [Courier(id=i, balance=random.random()*2) for i in range(5)]
+
+    @staticmethod
+    def _get_active_orders() -> List[Order]:
+        return [Order(id=i*10) for i in range(1, 12)]
+
+    def generate_graph(self):
+        active_orders = self._get_active_orders()
+        order_ids = [order.id for order in active_orders]
+        # find weight
+        self.G = nx.complete_graph(len(active_orders) + 1)  # +1 this is hub
+        self.G = nx.relabel_nodes(self.G, {i: order_id for i, order_id in enumerate(order_ids, start=1)})
+        self.G = nx.relabel_nodes(self.G, {0: self.hub_id})
+        for (u, v) in self.G.edges():
+            self.G.edges[u, v]['weight'] = random.random()
+
+
+if __name__ == '__main__':
+    way_bill_worker = WayBillGenerator(hub_id=1111111, optimize_func=None, metrics_coeff=MetricsCoeff())
+    way_bill_worker.create_way_bills()
