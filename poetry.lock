@@ -42,6 +42,17 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-cors-headers"
+version = "4.1.0"
+description = "django-cors-headers is a Django application for handling the server headers required for Cross-Origin Resource Sharing (CORS)."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+Django = ">=3.2"
+
+[[package]]
 name = "django-environ"
 version = "0.10.0"
 description = "A package that allows you to utilize 12factor inspired environment variables to configure your Django application."
@@ -228,12 +239,13 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "flake8 (<5)", "pytest-co
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "97dc8c8606f561f8fd8f8167a4bf96d5cc8878005c4cf852827e611459b42fae"
+content-hash = "30aff71f4b800ea15060428a7869e0b58ff1cd922b75c2d284c01e6b9d963040"
 
 [metadata.files]
 asgiref = []
 "backports.zoneinfo" = []
 django = []
+django-cors-headers = []
 django-environ = []
 django-filter = []
 djangorestframework = []
