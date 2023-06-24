@@ -13,16 +13,17 @@ DEBUG = env.bool("APP_DEBUG")
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = [
-  'accept',
-  'accept-encoding',
-  'authorization',
-  'content-type',
-  'origin',
-  'dnt',
-  'user-agent',
-  'x-csrftoken',
-  'x-requested-with']
-CORS_ALLOW_METHODS = ['DELETE', 'GET', 'OPTIONS', 'PATCH', 'POST', 'PUT']
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "origin",
+    "dnt",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
+CORS_ALLOW_METHODS = ["DELETE", "GET", "OPTIONS", "PATCH", "POST", "PUT"]
 ALLOWED_HOSTS = [
     "*",
     "0.0.0.0",
