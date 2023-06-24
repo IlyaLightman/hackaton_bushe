@@ -7,72 +7,37 @@ from web.views.waybill import WaybillViewSet
 
 urlpatterns = [
     path(
-        "orders",
-        OrdersViewSet.as_view(
-            {
-                "get": "list",
-                "post": "create",
-            }
-        ),
+        "orders/",
+        OrdersViewSet.as_view({"get": "list", "post": "create"}),
     ),
     path(
-        "orders/<int:pk>",
-        OrdersViewSet.as_view(
-            {
-                "get": "retrieve",
-                "patch": "partial_update",
-            }
-        ),
+        "orders/<int:pk>/",
+        OrdersViewSet.as_view({"get": "retrieve", "patch": "partial_update"}),
     ),
     path(
-        "waybills",
-        WaybillViewSet.as_view(
-            {
-                "get": "list",
-                "post": "create",
-            }
-        ),
+        "waybills/",
+        WaybillViewSet.as_view({"get": "list", "post": "create"}),
     ),
     path(
-        "waybills/<int:pk>",
-        WaybillViewSet.as_view(
-            {
-                "get": "retrieve",
-            }
-        ),
+        "waybills/<int:pk>/",
+        WaybillViewSet.as_view({"get": "retrieve"}),
     ),
     path(
-        "couriers",
+        "couriers/",
+        CourierViewSet.as_view({"get": "list"}),
+    ),
+    path(
+        "couriers/<int:pk>/",
         CourierViewSet.as_view(
-            {
-                "get": "list",
-            }
+            {"get": "retrieve", "put": "update", "patch": "partial_update"}
         ),
     ),
     path(
-        "couriers/<int:pk>",
-        CourierViewSet.as_view(
-            {
-                "get": "retrieve",
-                "put": "update",
-                "patch": "partial_update",
-            }
-        ),
+        "hubs/",
+        HubViewSet.as_view({"get": "list"}),
     ),
     path(
-        "hubs",
-        HubViewSet.as_view(
-            {
-                "get": "list",
-            }
-        ),
-    ),
-    path(
-        "hubs/<int:pk>",
-        HubViewSet.as_view(
-            {
-                "get": "retrieve",
-            }
-        ),
+        "hubs/<int:pk>/",
+        HubViewSet.as_view({"get": "retrieve"}),
     ),
 ]
