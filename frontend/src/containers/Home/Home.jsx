@@ -1,20 +1,28 @@
-import React from 'react'
-import { useQuery } from 'react-query'
+import React, { useEffect } from 'react'
 
 import { Grid } from '@mui/material'
 
 import HubBox from '../../components/HubBox'
+import useHttp from '../../hooks/http.hook'
 
 const Home = () => {
-	const { data, isLoading } = useQuery('hubs')
+	const { request } = useHttp()
+
+	useEffect(() => {
+		const fetchHubs = async () => {
+			const data = await request('/hubs/')
+			console.log(data)
+		}
+		fetchHubs()
+	}, [request])
 
 	const hubs = [
-		{ name: '123', address: '123' },
-		{ name: '456', address: '456' },
-		{ name: '123', address: '123' },
-		{ name: '456', address: '456' },
-		{ name: '123', address: '123' },
-		{ name: '456', address: '456' }
+		{ name: '1231', address: '123' },
+		{ name: '4562', address: '456' },
+		{ name: '1233', address: '123' },
+		{ name: '4564', address: '456' },
+		{ name: '1235', address: '123' },
+		{ name: '4566', address: '456' }
 	]
 
 	return (
