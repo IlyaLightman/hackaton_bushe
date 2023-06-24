@@ -1,0 +1,39 @@
+.idea/
+
+# deploy
+.gitlab-ci.yml
+
+# byte-compiled
+__pycache__/
+*.py[cod]
+*$py.class
+
+# mypy
+.mypy_cache/
+
+# C extensions
+*.so
+
+# ide
+.idea
+
+# virtual environment
+.venv/
+venv/
+
+mnt/
+venv
+
+shared/logs
+
+docker-compose.override.yml
+
+.python-version
+dbdata/
+
+.coverage
+.env
+
+.env
+tree
+coverage.xml
