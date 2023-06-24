@@ -11,6 +11,8 @@ SECRET_KEY = env.str("APP_SECRET_KEY")
 
 DEBUG = env.bool("APP_DEBUG")
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 ALLOWED_HOSTS = [
     "*",
     "0.0.0.0",
@@ -27,8 +29,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "rest_framework",
     "corsheaders",
+    "rest_framework",
     "drf_yasg",
     "web.apps.WebConfig",
 ]
