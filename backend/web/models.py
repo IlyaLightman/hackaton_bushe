@@ -11,6 +11,17 @@ class OrderStatusEnum(models.TextChoices):
     delivered = "delivered"
 
 
+class WaybillStatusChoices(models.TextChoices):
+    created = "created"
+    appointed = "appointed"
+    in_progress = "in_progress"
+    completed = "completed"
+
+
+class CourierStatusChoices(models.TextChoices):
+    free = "free"
+    busy = "busy"
+
 class OrderEventEnum(enum.StrEnum):
     created = enum.auto()
     changed = enum.auto()
@@ -32,7 +43,7 @@ class HubWorkHours(models.Model):
 
 class Courier(models.Model):
     name = models.CharField(max_length=255)
-    status = models.CharField(max_length=255)
+    status = models.CharField(max_length=255, choices=CourierStatusChoices.choices)
     telegram_id = models.CharField(max_length=255, null=True)
     hub = models.ForeignKey("Hub", on_delete=models.RESTRICT)
 
@@ -64,6 +75,7 @@ class OrderHistory(models.Model):
 class Waybill(models.Model):
     courier = models.ForeignKey("Courier", on_delete=models.RESTRICT, null=True)
     route_url = models.TextField()
+    status = models.CharField(max_length=255, choices=WaybillStatusChoices.choices)
 
 
 class WaybillOrder(models.Model):

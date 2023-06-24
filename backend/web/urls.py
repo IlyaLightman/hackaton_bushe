@@ -33,6 +33,10 @@ urlpatterns = [
         ),
     ),
     path(
+        "couriers/<int:pk>/waybill",
+        CourierViewSet.as_view({"get": "waybill"}),
+    ),
+    path(
         "hubs/",
         HubViewSet.as_view({"get": "list"}),
     ),
