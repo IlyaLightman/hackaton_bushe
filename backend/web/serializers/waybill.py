@@ -15,7 +15,7 @@ class CreateWaybillSerializer(serializers.Serializer):
         order_number = serializers.IntegerField()
 
     courier_id = serializers.IntegerField()
-    orders = OrdersSerializer()
+    orders = OrdersSerializer(many=True)
 
     class Meta:
         model = Waybill
