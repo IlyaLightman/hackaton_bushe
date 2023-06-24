@@ -28,10 +28,10 @@ class OrderEventEnum(enum.StrEnum):
 
 
 class Hub(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.TextField()
     address_lat = models.FloatField()
     address_lon = models.FloatField()
-    address_string = models.CharField(max_length=255)
+    address_string = models.TextField()
 
 
 class HubWorkHours(models.Model):
