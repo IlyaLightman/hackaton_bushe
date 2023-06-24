@@ -2,7 +2,8 @@ version: '3'
 services:
   app:
     build: .
-    command: "python backend/manage.py"
+    command: "python backend/manage.py runserver"
     container_name: hakaton-app
     ports:
       - "8000:8000"
+      - "8080:8080"
