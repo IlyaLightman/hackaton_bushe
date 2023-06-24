@@ -23,12 +23,12 @@ class Command(BaseCommand):
     def _create_hubs(self):
         Hub.objects.bulk_create(
             Hub(
-                name=self.faker.text.text(3),
+                name=f"Хаб №{i}",
                 address_string=self.faker.address.address(),
                 address_lat=self.faker.address.latitude(),
                 address_lon=self.faker.address.longitude(),
             )
-            for _ in range(10)
+            for i in range(10)
         )
 
     def _create_couriers(self):
