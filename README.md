@@ -26,11 +26,14 @@ Hub - точка выдачи заказов:
 - lat: float
 - lon: float
 - address: varchar
+- since: time
+- till: time
 
 Courier - курьер:
 
 - id: int
 - name: varchar
+- hub_id: foreign key hub.id
 
 Order - заказ:
 
