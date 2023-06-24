@@ -6,6 +6,7 @@ const Hub = () => {
 
 	return (
 		<>
+			<p>Hahub</p>
 			<p>
 				Hub {id} {screen}
 			</p>

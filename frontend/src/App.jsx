@@ -1,25 +1,32 @@
 import React from 'react'
+import { QueryClient, QueryClientProvider } from 'react-query'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 
-import { Box } from '@mui/material'
+import { Container, Box, Typography } from '@mui/material'
 
 import Hub from './containers/Hub/Hub'
+import Home from './containers/Home/Home'
+
+const queryClient = new QueryClient()
 
 const App = () => {
 	return (
-		<BrowserRouter>
-			<Routes>
-				<Route
-					path='/'
-					element={
-						<Box>
-							<Link to='/hub'>Hub 1</Link>
-						</Box>
-					}
-				/>
-				<Route path='/hub/:id/:screen' element={<Hub />} />
-			</Routes>
-		</BrowserRouter>
+		<QueryClientProvider client={queryClient}>
+			<BrowserRouter>
+				<Container
+					maxWidth='sm'
+					sx={{ 'text-align': 'center', marginTop: 2, cursor: 'default' }}
+				>
+					<Typography variant='h3'>Bushe Delivery</Typography>
+				</Container>
+				<Container>
+					<Routes>
+						<Route path='/' element={<Home />} />
+						<Route path='/hub/:id?/:screen?' element={<Hub />} />
+					</Routes>
+				</Container>
+			</BrowserRouter>
+		</QueryClientProvider>
 	)
 }
 
