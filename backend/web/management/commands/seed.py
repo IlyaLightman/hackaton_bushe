@@ -14,7 +14,7 @@ class Faker(mimesis.Generic):
 
 
 class Command(BaseCommand):
-    faker = Faker()
+    faker = Faker(locale=mimesis.locales.Locale.RU)
 
     def handle(self, *args, **options):
         self._create_hubs()
@@ -23,7 +23,7 @@ class Command(BaseCommand):
     def _create_hubs(self):
         Hub.objects.bulk_create(
             Hub(
-                name=self.faker.text.word(),
+                name=self.faker.text.text(3),
                 address_string=self.faker.address.address(),
                 address_lat=self.faker.address.latitude(),
                 address_lon=self.faker.address.longitude(),
