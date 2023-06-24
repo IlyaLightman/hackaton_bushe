@@ -25,8 +25,8 @@ const Home = () => {
 
 	return (
 		<Grid container columns={3}>
-			{hubs.map((hub, index) => (
-				<Grid xs={1} minHeight='1rem' key={hub?.name}>
+			{hubs?.map((hub, index) => (
+				<Grid xs={1} minHeight='1rem' key={hub.id}>
 					<HubBox index={index} hub={hub} />
 				</Grid>
 			))}

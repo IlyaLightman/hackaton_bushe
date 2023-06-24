@@ -19,7 +19,7 @@ const useHttp = () => {
 				body,
 				headers
 			})
-			const data = await response.json()
+			const data = response.data
 
 			if (!response.ok) {
 				setError(data.errors || 'Something wrong')
@@ -29,6 +29,7 @@ const useHttp = () => {
 
 			return data
 		} catch (err) {
+			console.log(err)
 			setLoading(false)
 			setError(err.message)
 		}
