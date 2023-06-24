@@ -10,6 +10,40 @@
 - связь с менеджером
 
 ---
+Модели:
+
+User - менеджер
+
+- id: int
+- name: varchar
+- login: varchar
+- password: varchar
+
+Hub - точка выдачи заказов:
+
+- id: int
+- name: varchar
+- lat: float
+- lon: float
+- address: varchar
+
+Courier - курьер:
+
+- id: int
+- name: varchar
+
+Order - заказ:
+
+- id: int
+- number: varchar unique
+- status: varchar
+- hub: foreign key hub.id
+- lat: float
+- lon: float
+- address: varchar
+- comment: varchar nullable
+
+---
 request: GET api/orders - получить список заказов
 response:
 
