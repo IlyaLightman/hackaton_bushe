@@ -2,8 +2,27 @@ version: '3'
 services:
   app:
     build: .
-    command: "python backend/manage.py runserver"
+    command: sh -c "python backend/manage.py migrate && python backend/manage.py runserver 0.0.0.0:8000"
     container_name: hakaton-app
+    depends_on:
+      - db
+    env_file:
+      - .env-default
+      - .env
     ports:
       - "8000:8000"
       - "8080:8080"
+    volumes:
+      - ./:/usr/app/code/
+
+  db:
+    image: postgres:14
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=hakaton
+    container_name: hakaton-db
+    volumes:
+      - ./dbdata:/var/lib/postgresql/data

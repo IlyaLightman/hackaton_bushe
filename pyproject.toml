@@ -7,6 +7,12 @@ authors = ["alexeymyakinin <alexeymyakinin@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 Django = "^4.2.2"
+django-environ = "^0.10.0"
+djangorestframework = "^3.14.0"
+Markdown = "^3.4.3"
+django-filter = "^23.2"
+drf-yasg = "^1.21.6"
+psycopg2-binary = "^2.9.6"
 
 [tool.poetry.dev-dependencies]
 
