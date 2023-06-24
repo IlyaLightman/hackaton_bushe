@@ -11,7 +11,6 @@ const Home = () => {
 	useEffect(() => {
 		const fetchHubs = async () => {
 			const data = await request('/hubs/')
-			console.log(data)
 		}
 		fetchHubs()
 	}, [request])
@@ -26,7 +25,7 @@ const Home = () => {
 	return (
 		<Grid container columns={3}>
 			{hubs?.map((hub, index) => (
-				<Grid xs={1} minHeight='1rem' key={hub.id}>
+				<Grid item xs={1} minHeight='1rem' key={hub.id}>
 					<HubBox index={index} hub={hub} />
 				</Grid>
 			))}

@@ -1,8 +1,11 @@
 import React from 'react'
-import { useParams, useNavigate, Link } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 import { Grid, Container, Typography, Card, Stack } from '@mui/material'
-import HubList from '../HubList/HubList'
+import { blue } from '@mui/material/colors'
+
+import useSelected from './useSelected'
+import Couriers from './Couriers'
 
 const pages = [
 	{
@@ -30,24 +33,19 @@ const LinkTypography = ({ hubId, screen, activeScreen, name }) => {
 		<Typography
 			variant='h5'
 			onClick={() => navigate(`/hub/${hubId}/${screen || ''}`)}
-			sx={{ cursor: 'pointer', color: screen == activeScreen ? 'royalblue' : 'black' }}
+			sx={{ cursor: 'pointer', color: screen == activeScreen ? blue['600'] : 'black' }}
 		>
 			{name}
 		</Typography>
 	)
 }
 
-const HubHeader = ({ hub, activeScreen }) => {
+const HubHeader = ({ activeScreen }) => {
 	return (
 		<Container>
 			<Grid container justifyContent='center' spacing={4}>
-				{/* <Grid item>
-					<Typography variant='h5' sx={{ cursor: 'default' }}>
-						{hub?.name || 'Hub'}:
-					</Typography>
-				</Grid> */}
 				{pages.map(page => (
-					<Grid item>
+					<Grid item key={`${page.screen}`}>
 						<LinkTypography hubId={1} activeScreen={activeScreen} {...page} />
 					</Grid>
 				))}
@@ -59,6 +57,8 @@ const HubHeader = ({ hub, activeScreen }) => {
 const Hub = () => {
 	const { id, screen } = useParams()
 
+	const { getSelectScreenItemSetter, getSelectedScreenItem } = useSelected()
+
 	return (
 		<Stack spacing={4}>
 			<HubHeader activeScreen={screen} />
@@ -68,7 +68,11 @@ const Hub = () => {
 						<Card sx={{ background: 'gray', width: '100%', height: '100%' }}>Map</Card>
 					</Grid>
 					<Grid item xs={1}>
-						<HubList />
+						<Couriers
+							hubId={id}
+							selectedItem={getSelectedScreenItem('couriers')}
+							onSelect={getSelectScreenItemSetter('couriers')}
+						/>
 					</Grid>
 				</Grid>
 			</Container>
