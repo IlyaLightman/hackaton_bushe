@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
 
-import { Container, Typography } from '@mui/material'
+import { Container, Stack, Typography } from '@mui/material'
 
 import Hub from './containers/Hub/Hub'
 import Home from './containers/Home/Home'
@@ -25,13 +25,15 @@ const Header = () => {
 const App = () => {
 	return (
 		<BrowserRouter>
-			<Header />
-			<Container>
-				<Routes>
-					<Route path='/' element={<Home />} />
-					<Route path='/hub/:id?/:screen?' element={<Hub />} />
-				</Routes>
-			</Container>
+			<Stack sx={{ width: '100%', display: 'flex', alignItems: 'center' }} spacing={2}>
+				<Header />
+				<Container>
+					<Routes>
+						<Route path='/' element={<Home />} />
+						<Route path='/hub/:id?/:screen?' element={<Hub />} />
+					</Routes>
+				</Container>
+			</Stack>
 		</BrowserRouter>
 	)
 }

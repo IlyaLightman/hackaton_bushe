@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 
-import { Grid, Container, Typography } from '@mui/material'
+import { Grid, Container, Typography, Card, Stack } from '@mui/material'
 
 const pages = [
 	{
@@ -14,7 +14,11 @@ const pages = [
 	},
 	{
 		name: 'Маршруты',
-		screen: 'waybills'
+		screen: 'routes'
+	},
+	{
+		name: 'Управление',
+		screen: null
 	}
 ]
 
@@ -24,8 +28,8 @@ const LinkTypography = ({ hubId, screen, activeScreen, name }) => {
 	return (
 		<Typography
 			variant='h5'
-			onClick={() => navigate(`/hub/${hubId}/${screen}`)}
-			sx={{ cursor: 'pointer', color: screen === activeScreen ? 'royalblue' : 'black' }}
+			onClick={() => navigate(`/hub/${hubId}/${screen || ''}`)}
+			sx={{ cursor: 'pointer', color: screen == activeScreen ? 'royalblue' : 'black' }}
 		>
 			{name}
 		</Typography>
@@ -35,12 +39,12 @@ const LinkTypography = ({ hubId, screen, activeScreen, name }) => {
 const HubHeader = ({ hub, activeScreen }) => {
 	return (
 		<Container>
-			<Grid container spacing={4}>
-				<Grid item>
+			<Grid container justifyContent='center' spacing={4}>
+				{/* <Grid item>
 					<Typography variant='h5' sx={{ cursor: 'default' }}>
 						{hub?.name || 'Hub'}:
 					</Typography>
-				</Grid>
+				</Grid> */}
 				{pages.map(page => (
 					<Grid item>
 						<LinkTypography hubId={1} activeScreen={activeScreen} {...page} />
@@ -52,18 +56,22 @@ const HubHeader = ({ hub, activeScreen }) => {
 }
 
 const Hub = () => {
-	const { id, screen } = useParams() // screen is [null (settings), 'couriers', 'orders', 'routes']
+	const { id, screen } = useParams()
 
 	return (
-		<>
+		<Stack spacing={4}>
 			<HubHeader activeScreen={screen} />
 			<Container>
-				<p>Hahub</p>
-				<p>
-					Hub {id} {screen}
-				</p>
+				<Grid container spacing={4} columns={2}>
+					<Grid item xs={1}>
+						<Card sx={{ background: 'gray', width: '100%', height: '100%' }}>Map</Card>
+					</Grid>
+					<Grid item xs={1}>
+						map
+					</Grid>
+				</Grid>
 			</Container>
-		</>
+		</Stack>
 	)
 }
 
