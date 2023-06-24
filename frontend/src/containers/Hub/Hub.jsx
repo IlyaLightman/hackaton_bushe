@@ -2,6 +2,7 @@ import React from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 
 import { Grid, Container, Typography, Card, Stack } from '@mui/material'
+import HubList from '../HubList/HubList'
 
 const pages = [
 	{
@@ -67,7 +68,7 @@ const Hub = () => {
 						<Card sx={{ background: 'gray', width: '100%', height: '100%' }}>Map</Card>
 					</Grid>
 					<Grid item xs={1}>
-						map
+						<HubList />
 					</Grid>
 				</Grid>
 			</Container>

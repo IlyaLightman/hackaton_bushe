@@ -5,6 +5,7 @@ import { Container, Stack, Typography } from '@mui/material'
 
 import Hub from './containers/Hub/Hub'
 import Home from './containers/Home/Home'
+import Logo from './containers/Logo'
 
 const Header = () => {
 	const navigate = useNavigate()
@@ -17,7 +18,8 @@ const Header = () => {
 			sx={{ 'text-align': 'center', marginTop: 2, marginBottom: 1, cursor: 'pointer' }}
 			onClick={handleGoHome}
 		>
-			<Typography variant='h4'>Bushe Delivery</Typography>
+			<Logo />
+			{/* <Typography variant='h4'>Bushe Delivery</Typography> */}
 		</Container>
 	)
 }
@@ -25,7 +27,7 @@ const Header = () => {
 const App = () => {
 	return (
 		<BrowserRouter>
-			<Stack sx={{ width: '100%', display: 'flex', alignItems: 'center' }} spacing={2}>
+			<Stack sx={{ width: '100%', display: 'flex', alignItems: 'center' }} spacing={1}>
 				<Header />
 				<Container>
 					<Routes>
