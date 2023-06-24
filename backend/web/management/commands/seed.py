@@ -28,7 +28,7 @@ class Command(BaseCommand):
                 address_lat=self.faker.address.latitude(),
                 address_lon=self.faker.address.longitude(),
             )
-            for _ in range(100)
+            for _ in range(10)
         )
 
     def _create_couriers(self):
@@ -39,5 +39,5 @@ class Command(BaseCommand):
                 hub=self.faker.random.choice(hubs),
                 status=self.faker.random.choice(CourierStatusChoices.names),
             )
-            for _ in range(1000)
+            for _ in range(50)
         )
