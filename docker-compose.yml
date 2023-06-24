@@ -12,6 +12,9 @@ services:
     ports:
       - "8000:8000"
       - "8080:8080"
+    volumes:
+      - ./:/usr/app/code/
+
   db:
     image: postgres:14
     ports:

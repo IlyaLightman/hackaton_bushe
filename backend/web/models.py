@@ -23,6 +23,13 @@ class Hub(models.Model):
     address_string = models.CharField(max_length=255)
 
 
+class HubWorkHours(models.Model):
+    hub = models.ForeignKey("Hub", on_delete=models.RESTRICT)
+    weekday = models.IntegerField()
+    start = models.TimeField()
+    end = models.TimeField()
+
+
 class Courier(models.Model):
     name = models.CharField(max_length=255)
     status = models.CharField(max_length=255)
@@ -42,6 +49,8 @@ class Order(models.Model):
     address_string = models.CharField(max_length=255)
     address_lat = models.FloatField()
     address_lon = models.FloatField()
+    customer_name = models.CharField(max_length=255)
+    customer_phone = models.CharField(max_length=255)
 
 
 class OrderHistory(models.Model):
@@ -52,6 +61,7 @@ class OrderHistory(models.Model):
 
 class Waybill(models.Model):
     courier = models.ForeignKey("Courier", on_delete=models.RESTRICT, null=True)
+    route_url = models.TextField()
 
 
 class WaybillOrder(models.Model):
