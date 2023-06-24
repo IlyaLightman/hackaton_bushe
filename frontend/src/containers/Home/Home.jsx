@@ -17,19 +17,17 @@ const Home = () => {
 	}, [request])
 
 	const hubs = [
-		{ name: '1231', address: '123' },
-		{ name: '4562', address: '456' },
-		{ name: '1233', address: '123' },
-		{ name: '4564', address: '456' },
-		{ name: '1235', address: '123' },
-		{ name: '4566', address: '456' }
+		{ id: 1, name: '1231', address: '123' },
+		{ id: 2, name: '4562', address: '456' },
+		{ id: 3, name: '1233', address: '123' },
+		{ id: 4, name: '4564', address: '456' }
 	]
 
 	return (
 		<Grid container columns={3}>
-			{hubs.map(hub => (
+			{hubs.map((hub, index) => (
 				<Grid xs={1} minHeight='1rem' key={hub?.name}>
-					<HubBox hub={hub} />
+					<HubBox index={index} hub={hub} />
 				</Grid>
 			))}
 		</Grid>
