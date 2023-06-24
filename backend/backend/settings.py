@@ -10,7 +10,7 @@ env.read_env(BASE_DIR.parent / ".env")
 SECRET_KEY = env.str("APP_SECRET_KEY")
 
 DEBUG = env.bool("APP_DEBUG")
-
+CORS_ORIGIN_ALLOW_ALL = DEBUG
 ALLOWED_HOSTS = [
     "*",
     "127.0.0.1",

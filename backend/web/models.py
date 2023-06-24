@@ -33,6 +33,8 @@ class HubWorkHours(models.Model):
 class Courier(models.Model):
     name = models.CharField(max_length=255)
     status = models.CharField(max_length=255)
+    telegram_id = models.CharField(max_length=255, null=True)
+    hub = models.ForeignKey("Hub", on_delete=models.RESTRICT)
 
 
 class CourierWorkHours(models.Model):

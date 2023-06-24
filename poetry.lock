@@ -137,6 +137,14 @@ importlib-metadata = {version = ">=4.4", markers = "python_version < \"3.10\""}
 testing = ["coverage", "pyyaml"]
 
 [[package]]
+name = "mimesis"
+version = "10.1.0"
+description = "Mimesis: Fake Data Generator."
+category = "main"
+optional = false
+python-versions = ">=3.8,<4.0"
+
+[[package]]
 name = "packaging"
 version = "23.1"
 description = "Core utilities for Python packages"
@@ -220,7 +228,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "flake8 (<5)", "pytest-co
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "ccab12d861ad48441630eab3ae5d45a4183a2caf7fd6724c351528ac99b1d2b6"
+content-hash = "97dc8c8606f561f8fd8f8167a4bf96d5cc8878005c4cf852827e611459b42fae"
 
 [metadata.files]
 asgiref = []
@@ -233,6 +241,7 @@ drf-yasg = []
 importlib-metadata = []
 inflection = []
 markdown = []
+mimesis = []
 packaging = []
 psycopg2-binary = []
 pytz = []
