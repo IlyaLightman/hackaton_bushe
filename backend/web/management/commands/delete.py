@@ -1,5 +1,5 @@
 from django.core.management import BaseCommand
-
+from django.db import connection
 from django.core.management import BaseCommand
 
 from web.models import Courier, Hub, Order, OrderHistory, Waybill, WaybillOrder
@@ -16,3 +16,11 @@ class Command(BaseCommand):
             Hub,
         ):
             model.objects.filter().delete()
+
+        with connection.cursor() as cursor:
+            cursor.execute("ALTER SEQUENCE web_courier_id_seq RESTART;")
+            cursor.execute("ALTER SEQUENCE web_hub_id_seq RESTART;")
+            cursor.execute("ALTER SEQUENCE web_order_id_seq RESTART;")
+            cursor.execute("ALTER SEQUENCE web_orderhistory_id_seq RESTART;")
+            cursor.execute("ALTER SEQUENCE web_waybill_id_seq RESTART;")
+            cursor.execute("ALTER SEQUENCE web_waybillorder_id_seq RESTART;")
