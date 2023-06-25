@@ -77,7 +77,7 @@ class Command(BaseCommand):
                 customer_name=self.faker.person.name(),
                 customer_phone=self.faker.person.phone_number(),
             )
-            for _ in range(10)
+            for _ in range(6)
         )
         OrderHistory.objects.bulk_create(
             OrderHistory(
