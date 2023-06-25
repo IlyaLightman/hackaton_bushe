@@ -28,9 +28,7 @@ urlpatterns = [
     ),
     path(
         "couriers/<int:pk>/",
-        CourierViewSet.as_view(
-            {"get": "retrieve", "put": "update", "patch": "partial_update"}
-        ),
+        CourierViewSet.as_view({"get": "retrieve", "patch": "partial_update"}),
     ),
     path(
         "couriers/<int:telegram_id>/waybill",
