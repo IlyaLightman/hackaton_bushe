@@ -33,7 +33,7 @@ urlpatterns = [
         ),
     ),
     path(
-        "couriers/<int:pk>/waybill",
+        "couriers/<int:telegram_id>/waybill",
         CourierViewSet.as_view({"get": "waybill"}),
     ),
     path(

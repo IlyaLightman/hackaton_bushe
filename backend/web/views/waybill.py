@@ -1,8 +1,7 @@
 from rest_framework import viewsets
 
 from web.models import Waybill
-from web.serializers.waybill import CreateWaybillSerializer, WaybillSerializer
-
+from web.serializers.waybill import CreateWaybillSerializer, WaybillSerializer,GetWaybillSerializer
 
 class WaybillViewSet(viewsets.GenericViewSet):
     queryset = Waybill.objects.all()
@@ -10,7 +9,7 @@ class WaybillViewSet(viewsets.GenericViewSet):
     def get_serializer_class(self):
         mapping = {
             "list": WaybillSerializer,
-            "retrieve": WaybillSerializer,
+            "retrieve": GetWaybillSerializer,
             "create": CreateWaybillSerializer,
         }
 
