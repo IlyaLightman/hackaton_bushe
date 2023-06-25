@@ -39,6 +39,7 @@ const Orders = ({ hubId, selectedItem, onSelect }) => {
 			selectedItemIndex={selectedItemIndex}
 			onClick={onSelect}
 			firstColumnWidth={3}
+			withCreate
 		/>
 	)
 }

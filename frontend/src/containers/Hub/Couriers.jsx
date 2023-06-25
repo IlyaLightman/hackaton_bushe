@@ -33,7 +33,14 @@ const Couriers = ({ hubId, selectedItem, onSelect }) => {
 	const couriers = getCouriersItems(hubId)
 	const selectedItemIndex = findSelectedItemIndex(couriers, selectedItem)
 
-	return <HubList items={couriers} selectedItemIndex={selectedItemIndex} onClick={onSelect} />
+	return (
+		<HubList
+			items={couriers}
+			selectedItemIndex={selectedItemIndex}
+			onClick={onSelect}
+			withCreate
+		/>
+	)
 }
 
 export default Couriers

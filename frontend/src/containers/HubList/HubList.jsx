@@ -4,6 +4,8 @@ import { Block, CheckCircleOutline, Clear, FlipCameraAndroid } from '@mui/icons-
 import { Typography, List, ListItem, Stack, styled, Grid } from '@mui/material'
 import { amber, blueGrey, green } from '@mui/material/colors'
 
+import HubCreateButton from './HubCreateButton'
+
 const statusColorByType = {
 	success: green['600'],
 	process: amber['600'],
@@ -80,7 +82,14 @@ const HubListItem = ({
 	)
 }
 
-const HubList = ({ items, selectedItemIndex, onClick, firstColumnWidth }) => {
+const HubList = ({
+	items,
+	selectedItemIndex,
+	onClick,
+	firstColumnWidth,
+	withCreate,
+	CreateButton
+}) => {
 	return (
 		<List sx={{ width: '100%', padding: 0 }}>
 			{items?.map(({ statusTitle, statusType, id, ...itemProps }, index) => (
@@ -95,15 +104,7 @@ const HubList = ({ items, selectedItemIndex, onClick, firstColumnWidth }) => {
 					<StatusTag title={statusTitle} type={statusType} />
 				</HubListItem>
 			))}
-			{/* <HubListItem title='Лев Толстой' description='25 км, 03:44' selected>
-				<StatusTag title='Маршрут 2' type='process' />
-			</HubListItem>
-			<HubListItem title='Фёдор Достоевский' description='32 км, 05:12'>
-				<StatusTag title='Маршрут 1' type='process' />
-			</HubListItem>
-			<HubListItem title='Филипп Дик' description='4 км, 00:37'>
-				<StatusTag title='Свободен' type='success' />
-			</HubListItem> */}
+			{withCreate && (CreateButton ? <CreateButton /> : <HubCreateButton />)}
 		</List>
 	)
 }
