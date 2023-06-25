@@ -1,12 +1,13 @@
 import React from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 
-import { Grid, Container, Typography, Card, Stack, Box } from '@mui/material'
+import { Grid, Container, Typography, Stack, Box } from '@mui/material'
 import { blue } from '@mui/material/colors'
 
 import useSelected from './useSelected'
 
 import Couriers from './Couriers'
+import Control from './Control'
 import Orders from './Orders'
 import Routes from './Routes'
 
@@ -29,7 +30,7 @@ const pages = [
 	{
 		name: 'Управление',
 		screen: null,
-		PageComponent: Couriers
+		PageComponent: Control
 	}
 ]
 
