@@ -16,4 +16,8 @@ const useSelected = () => {
 	return { getSelectScreenItemSetter, getSelectedScreenItem }
 }
 
+export const findSelectedItemIndex = (items, selectedItem) => {
+	return items.findIndex(item => item.id === selectedItem)
+}
+
 export default useSelected

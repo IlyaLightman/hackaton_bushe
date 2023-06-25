@@ -1,28 +1,35 @@
 import React from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 
-import { Grid, Container, Typography, Card, Stack } from '@mui/material'
+import { Grid, Container, Typography, Card, Stack, Box } from '@mui/material'
 import { blue } from '@mui/material/colors'
 
 import useSelected from './useSelected'
+
 import Couriers from './Couriers'
+import Orders from './Orders'
+import Routes from './Routes'
 
 const pages = [
 	{
 		name: 'Курьеры',
-		screen: 'couriers'
+		screen: 'couriers',
+		PageComponent: Couriers
 	},
 	{
 		name: 'Заказы',
-		screen: 'orders'
+		screen: 'orders',
+		PageComponent: Orders
 	},
 	{
 		name: 'Маршруты',
-		screen: 'routes'
+		screen: 'routes',
+		PageComponent: Routes
 	},
 	{
 		name: 'Управление',
-		screen: null
+		screen: null,
+		PageComponent: Couriers
 	}
 ]
 
@@ -56,8 +63,9 @@ const HubHeader = ({ activeScreen }) => {
 
 const Hub = () => {
 	const { id, screen } = useParams()
-
 	const { getSelectScreenItemSetter, getSelectedScreenItem } = useSelected()
+
+	const currentPage = pages.find(page => page.screen == screen)
 
 	return (
 		<Stack spacing={4}>
@@ -65,14 +73,24 @@ const Hub = () => {
 			<Container>
 				<Grid container spacing={4} columns={2}>
 					<Grid item xs={1}>
-						<Card sx={{ background: 'gray', width: '100%', height: '100%' }}>Map</Card>
+						<Box
+							sx={{
+								background: 'lightgray',
+								width: '100%',
+								height: 320,
+								borderRadius: '16px',
+								marginBottom: '16px'
+							}}
+						></Box>
 					</Grid>
 					<Grid item xs={1}>
-						<Couriers
-							hubId={id}
-							selectedItem={getSelectedScreenItem('couriers')}
-							onSelect={getSelectScreenItemSetter('couriers')}
-						/>
+						{currentPage && (
+							<currentPage.PageComponent
+								hubId={id}
+								selectedItem={getSelectedScreenItem(screen)}
+								onSelect={getSelectScreenItemSetter(screen)}
+							/>
+						)}
 					</Grid>
 				</Grid>
 			</Container>

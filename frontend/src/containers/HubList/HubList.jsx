@@ -45,6 +45,7 @@ const HubListItem = ({
 	selected,
 	onClick,
 	children,
+	firstColumnWidth = 8,
 	...props
 }) => {
 	return (
@@ -63,10 +64,10 @@ const HubListItem = ({
 				sx={{ height: '100%' }}
 				columns={20}
 			>
-				<Grid item xs={8}>
+				<Grid item xs={firstColumnWidth}>
 					<Typography variant='subtitle1'>{title}</Typography>
 				</Grid>
-				<Grid item xs={6}>
+				<Grid item xs={20 - 6 - firstColumnWidth}>
 					<Typography variant='body1' sx={{ color: blueGrey['300'] }}>
 						{description}
 					</Typography>
@@ -79,7 +80,7 @@ const HubListItem = ({
 	)
 }
 
-const HubList = ({ items, selectedItemIndex, onClick }) => {
+const HubList = ({ items, selectedItemIndex, onClick, firstColumnWidth }) => {
 	return (
 		<List sx={{ width: '100%', padding: 0 }}>
 			{items?.map(({ statusTitle, statusType, id, ...itemProps }, index) => (
@@ -89,6 +90,7 @@ const HubList = ({ items, selectedItemIndex, onClick }) => {
 					selected={index === selectedItemIndex}
 					onClick={onClick}
 					key={id}
+					firstColumnWidth={firstColumnWidth}
 				>
 					<StatusTag title={statusTitle} type={statusType} />
 				</HubListItem>
