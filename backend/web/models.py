@@ -1,6 +1,6 @@
-import datetime
 import enum
 
+import django.utils.timezone
 from django.db import models
 
 
@@ -9,6 +9,10 @@ class OrderStatusChoices(models.TextChoices):
     picked = "picked"
     canceled = "canceled"
     delivered = "delivered"
+
+
+class OrderHistoryEventChoices(models.TextChoices):
+    status_changed = "status_changed"
 
 
 class WaybillStatusChoices(models.TextChoices):
@@ -56,9 +60,9 @@ class Order(models.Model):
 
 class OrderHistory(models.Model):
     order = models.ForeignKey("Order", on_delete=models.RESTRICT)
-    event = models.CharField(max_length=255)
+    event = models.CharField(max_length=255, choices=OrderHistoryEventChoices.choices)
     value = models.CharField(max_length=255)
-    timestamp = models.DateTimeField(default=datetime.datetime.utcnow)
+    timestamp = models.DateTimeField(default=django.utils.timezone.now)
 
 
 class Waybill(models.Model):

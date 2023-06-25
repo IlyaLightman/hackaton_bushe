@@ -4,7 +4,15 @@ import mimesis
 
 from django.core.management import BaseCommand
 
-from web.models import Courier, CourierStatusChoices, Hub, Order, OrderStatusChoices
+from web.models import (
+    Courier,
+    CourierStatusChoices,
+    Hub,
+    Order,
+    OrderHistory,
+    OrderHistoryEventChoices,
+    OrderStatusChoices,
+)
 
 
 class Faker(mimesis.Generic):
@@ -52,7 +60,7 @@ class Command(BaseCommand):
         )
 
     def _create_orders(self):
-        Order.objects.bulk_create(
+        orders = Order.objects.bulk_create(
             Order(
                 products=[{"id": 1, "name": "Булочка"}, {"id": 2, "name": "Водичка"}],
                 status=OrderStatusChoices.created,
@@ -64,4 +72,12 @@ class Command(BaseCommand):
                 customer_phone=self.faker.person.phone_number(),
             )
             for _ in range(50)
+        )
+        OrderHistory.objects.bulk_create(
+            OrderHistory(
+                order=order,
+                event=OrderHistoryEventChoices.status_changed,
+                value=OrderStatusChoices.created,
+            )
+            for order in orders
         )
