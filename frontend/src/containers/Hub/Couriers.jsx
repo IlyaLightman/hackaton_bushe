@@ -1,5 +1,7 @@
 import React from 'react'
+
 import HubList from '../HubList/HubList'
+import { findSelectedItemIndex } from './useSelected'
 
 const getCouriersItems = hubId => {
 	return [
@@ -15,8 +17,7 @@ const getCouriersItems = hubId => {
 			title: 'Александр Пушкин',
 			description: '3 км, 00:31',
 			statusTitle: 'Маршрут 2',
-			statusType: 'process',
-			selected: true
+			statusType: 'process'
 		},
 		{
 			id: 3,
@@ -30,7 +31,7 @@ const getCouriersItems = hubId => {
 
 const Couriers = ({ hubId, selectedItem, onSelect }) => {
 	const couriers = getCouriersItems(hubId)
-	const selectedItemIndex = couriers.findIndex(courier => courier.id === selectedItem)
+	const selectedItemIndex = findSelectedItemIndex(couriers, selectedItem)
 
 	return <HubList items={couriers} selectedItemIndex={selectedItemIndex} onClick={onSelect} />
 }
