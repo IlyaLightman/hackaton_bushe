@@ -4,14 +4,24 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
-
+from django_filters import rest_framework as filters
 from web.models import Courier, Waybill, WaybillStatusChoices
 from web.serializers.courier import CourierSerializer
 from web.serializers.waybill import WaybillSerializer
 
 
+class CourierFilter(filters.FilterSet):
+    hub = filters.NumberFilter(field_name="hub", lookup_expr="eq")
+
+    class Meta:
+        model = Courier
+        fields = ["hub"]
+
+
 class CourierViewSet(viewsets.ModelViewSet):
     queryset = Courier.objects.all()
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = CourierFilter
 
     def get_serializer_class(self):
         mapping = {

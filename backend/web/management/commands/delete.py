@@ -2,7 +2,7 @@ from django.core.management import BaseCommand
 
 from django.core.management import BaseCommand
 
-from web.models import Courier, Hub, Waybill, WaybillOrder
+from web.models import Courier, Hub, Order, OrderHistory, Waybill, WaybillOrder
 
 
 class Command(BaseCommand):
@@ -10,6 +10,8 @@ class Command(BaseCommand):
         for model in (
             WaybillOrder,
             Waybill,
+            OrderHistory,
+            Order,
             Courier,
             Hub,
         ):
