@@ -30,6 +30,7 @@ class OrderEventEnum(enum.StrEnum):
 
 class Hub(models.Model):
     name = models.TextField()
+    logo = models.TextField(null=True)
     address_lat = models.FloatField()
     address_lon = models.FloatField()
     address_string = models.TextField()
