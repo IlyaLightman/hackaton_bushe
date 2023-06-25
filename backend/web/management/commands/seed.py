@@ -13,6 +13,7 @@ from web.models import (
     OrderHistoryEventChoices,
     OrderStatusChoices,
     Waybill,
+    WaybillStatusChoices,
 )
 
 
@@ -29,6 +30,7 @@ class Command(BaseCommand):
         self._create_hubs()
         self._create_couriers()
         self._create_orders()
+        self._create_waybills()
 
     def _create_hubs(self):
         hubs_logos = [
@@ -85,3 +87,11 @@ class Command(BaseCommand):
             )
             for order in orders
         )
+
+    def _create_waybills(self):
+        for idx, (courier, status) in enumerate(zip(Courier.objects.all(), WaybillStatusChoices.names)):
+            instance = Waybill.objects.create(
+                number=f"Заказ №1432-{idx + 1}",
+                status=WaybillStatusChoices.created,
+                courier=courier,
+            )
