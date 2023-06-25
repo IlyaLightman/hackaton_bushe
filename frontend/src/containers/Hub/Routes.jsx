@@ -9,14 +9,30 @@ const getRoutesItems = hubId => {
 		{
 			id: 1,
 			title: 'Маршрут 1',
-			description: '15:44 - 16:44',
-			statusTitle: 'Лев Толстой'
+			description: 'Александр Пушкин',
+			statusTitle: 'Завершён',
+			statusType: 'success'
 		},
 		{
 			id: 2,
 			title: 'Маршрут 2',
-			description: '15:52 - 16:52',
-			statusTitle: 'Александр Пушкин'
+			description: 'Лев Толстой',
+			statusTitle: 'В работе',
+			statusType: 'process'
+		},
+		{
+			id: 3,
+			title: 'Маршрут 3',
+			description: 'Александр Пушкин',
+			statusTitle: 'В работе',
+			statusType: 'process'
+		},
+		{
+			id: 4,
+			title: 'Маршрут 4',
+			description: '',
+			statusTitle: 'Создан',
+			statusType: 'point'
 		}
 	]
 }
