@@ -26,8 +26,8 @@ class CourierViewSet(viewsets.ModelViewSet):
         url_path="waybill",
         url_name="waybill",
     )
-    def waybill(self, request, pk):
-        courier = self.get_object()
+    def waybill(self, request, telegram_id):
+        courier = Courier.objects.get(telegram_id=telegram_id)
         waybill = Waybill.objects.get(
             courier=courier.id,
             status=WaybillStatusChoices.in_progress,

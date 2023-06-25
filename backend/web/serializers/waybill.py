@@ -2,6 +2,8 @@ from rest_framework import serializers
 
 from web.models import Waybill
 
+from web.serializers.order import OrderSerializer
+
 
 class WaybillSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,6 +18,15 @@ class CreateWaybillSerializer(serializers.Serializer):
 
     courier_id = serializers.IntegerField()
     orders = OrdersSerializer(many=True)
+
+    class Meta:
+        model = Waybill
+
+
+class GetWaybillSerializer(serializers.Serializer):
+    courier_id = serializers.IntegerField()
+    orders = OrderSerializer(many=True)
+    route_url = serializers.CharField()
 
     class Meta:
         model = Waybill
