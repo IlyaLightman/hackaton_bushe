@@ -54,6 +54,7 @@ class Courier(models.Model):
 
 class Order(models.Model):
     hub = models.ForeignKey("Hub", on_delete=models.RESTRICT)
+    number = models.CharField(max_length=255, null=True)
     products = models.JSONField()
     status = models.CharField(max_length=255, choices=OrderStatusChoices.choices)
     weight = models.FloatField()

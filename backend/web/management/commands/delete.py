@@ -1,6 +1,5 @@
 from django.core.management import BaseCommand
 from django.db import connection
-from django.core.management import BaseCommand
 
 from web.models import Courier, Hub, Order, OrderHistory, Waybill, WaybillOrder
 

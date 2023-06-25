@@ -68,8 +68,9 @@ class Command(BaseCommand):
         orders = Order.objects.bulk_create(
             Order(
                 hub=hub,
+                number=f"M52-{i + 1}",
                 products=[{"id": 1, "name": "Булочка"}, {"id": 2, "name": "Водичка"}],
-                status=OrderStatusChoices.created,
+                status=self.faker.random.choice(OrderStatusChoices.names) ,
                 weight=self.faker.random.randint(1, 10),
                 address_string=self.faker.address.address(),
                 address_lat=self.faker.address.latitude(),
@@ -77,7 +78,7 @@ class Command(BaseCommand):
                 customer_name=self.faker.person.name(),
                 customer_phone=self.faker.person.phone_number(),
             )
-            for _ in range(6)
+            for i in range(6)
         )
         OrderHistory.objects.bulk_create(
             OrderHistory(
