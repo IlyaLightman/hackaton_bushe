@@ -4,7 +4,7 @@ import enum
 from django.db import models
 
 
-class OrderStatusEnum(models.TextChoices):
+class OrderStatusChoices(models.TextChoices):
     created = "created"
     picked = "picked"
     canceled = "canceled"
@@ -45,7 +45,7 @@ class Courier(models.Model):
 
 class Order(models.Model):
     products = models.JSONField()
-    status = models.CharField(max_length=255, choices=OrderStatusEnum.choices)
+    status = models.CharField(max_length=255, choices=OrderStatusChoices.choices)
     weight = models.FloatField()
     address_string = models.CharField(max_length=255)
     address_lat = models.FloatField()

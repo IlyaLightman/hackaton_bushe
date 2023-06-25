@@ -4,7 +4,7 @@ import mimesis
 
 from django.core.management import BaseCommand
 
-from web.models import Courier, CourierStatusChoices, Hub
+from web.models import Courier, CourierStatusChoices, Hub, Order, OrderStatusChoices
 
 
 class Faker(mimesis.Generic):
@@ -19,6 +19,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self._create_hubs()
         self._create_couriers()
+        self._create_orders()
 
     def _create_hubs(self):
         hubs_logos = [
@@ -30,13 +31,13 @@ class Command(BaseCommand):
 
         Hub.objects.bulk_create(
             Hub(
-                name=f"Хаб №{i}",
+                name=f"Хаб №{i + 1}",
                 logo=logo,
                 address_string=self.faker.address.address(),
                 address_lat=self.faker.address.latitude(),
                 address_lon=self.faker.address.longitude(),
             )
-            for i, logo in zip(range(4), hubs_logos)
+            for i, logo in enumerate(hubs_logos)
         )
 
     def _create_couriers(self):
@@ -46,6 +47,21 @@ class Command(BaseCommand):
                 hub=hub,
                 name=self.faker.person.full_name(),
                 status=self.faker.random.choice(CourierStatusChoices.names),
+            )
+            for _ in range(50)
+        )
+
+    def _create_orders(self):
+        Order.objects.bulk_create(
+            Order(
+                products=[{"id": 1, "name": "Булочка"}, {"id": 2, "name": "Водичка"}],
+                status=OrderStatusChoices.created,
+                weight=self.faker.random.randint(1, 10),
+                address_string=self.faker.address.address(),
+                address_lat=self.faker.address.latitude(),
+                address_lon=self.faker.address.longitude(),
+                customer_name=self.faker.person.name(),
+                customer_phone=self.faker.person.phone_number(),
             )
             for _ in range(50)
         )
