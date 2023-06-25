@@ -12,6 +12,7 @@ from web.models import (
     OrderHistory,
     OrderHistoryEventChoices,
     OrderStatusChoices,
+    Waybill,
 )
 
 
@@ -49,37 +50,38 @@ class Command(BaseCommand):
         )
 
     def _create_couriers(self):
-        for hub in Hub.objects.all():
-            Courier.objects.bulk_create(
-                Courier(
-                    hub=hub,
-                    name=self.faker.person.full_name(),
-                    status=self.faker.random.choice(CourierStatusChoices.names),
-                )
-                for _ in range(10)
+        hub = Hub.objects.all().first()
+        Courier.objects.bulk_create(
+            Courier(
+                hub=hub,
+                name=self.faker.person.full_name(),
+                status=self.faker.random.choice(CourierStatusChoices.names),
             )
+            for _ in range(3)
+        )
 
     def _create_orders(self):
-        for hub in Hub.objects.all():
-            orders = Order.objects.bulk_create(
-                Order(
-                    hub=hub,
-                    products=[{"id": 1, "name": "Булочка"}, {"id": 2, "name": "Водичка"}],
-                    status=OrderStatusChoices.created,
-                    weight=self.faker.random.randint(1, 10),
-                    address_string=self.faker.address.address(),
-                    address_lat=self.faker.address.latitude(),
-                    address_lon=self.faker.address.longitude(),
-                    customer_name=self.faker.person.name(),
-                    customer_phone=self.faker.person.phone_number(),
-                )
-                for _ in range(50)
+        hub = Hub.objects.all().first()
+
+        orders = Order.objects.bulk_create(
+            Order(
+                hub=hub,
+                products=[{"id": 1, "name": "Булочка"}, {"id": 2, "name": "Водичка"}],
+                status=OrderStatusChoices.created,
+                weight=self.faker.random.randint(1, 10),
+                address_string=self.faker.address.address(),
+                address_lat=self.faker.address.latitude(),
+                address_lon=self.faker.address.longitude(),
+                customer_name=self.faker.person.name(),
+                customer_phone=self.faker.person.phone_number(),
             )
-            OrderHistory.objects.bulk_create(
-                OrderHistory(
-                    order=order,
-                    event=OrderHistoryEventChoices.status_changed,
-                    value=OrderStatusChoices.created,
-                )
-                for order in orders
+            for _ in range(10)
+        )
+        OrderHistory.objects.bulk_create(
+            OrderHistory(
+                order=order,
+                event=OrderHistoryEventChoices.status_changed,
+                value=OrderStatusChoices.created,
             )
+            for order in orders
+        )

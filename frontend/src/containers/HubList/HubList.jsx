@@ -1,6 +1,12 @@
 import React, { useMemo } from 'react'
 
-import { Block, CheckCircleOutline, Clear, FlipCameraAndroid } from '@mui/icons-material'
+import {
+	Block,
+	CheckCircleOutline,
+	Clear,
+	FlipCameraAndroid,
+	AddLocationOutlined
+} from '@mui/icons-material'
 import { Typography, List, ListItem, Stack, styled, Grid } from '@mui/material'
 import { amber, blueGrey, green } from '@mui/material/colors'
 
@@ -10,6 +16,7 @@ const statusColorByType = {
 	success: green['600'],
 	process: amber['600'],
 	disable: blueGrey['300'],
+	point: blueGrey['300'],
 	error: 'red'
 }
 
@@ -18,6 +25,7 @@ const getStatusIconByType = (type, color = 'black') =>
 		success: <CheckCircleOutline fontSize='small' sx={{ color }} />,
 		process: <FlipCameraAndroid fontSize='small' sx={{ color }} />,
 		disable: <Clear fontSize='small' sx={{ color }} />,
+		point: <AddLocationOutlined fontSize='small' sx={{ color }} />,
 		error: <Block fontSize='small' sx={{ color }} />
 	}[type])
 
@@ -67,7 +75,9 @@ const HubListItem = ({
 				columns={20}
 			>
 				<Grid item xs={firstColumnWidth}>
-					<Typography variant='subtitle1'>{title}</Typography>
+					<Typography variant='subtitle1' sx={{ userSelect: 'none' }}>
+						{title}
+					</Typography>
 				</Grid>
 				<Grid item xs={20 - 6 - firstColumnWidth}>
 					<Typography variant='body1' sx={{ color: blueGrey['300'] }}>

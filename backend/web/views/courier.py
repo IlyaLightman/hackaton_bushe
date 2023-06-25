@@ -11,7 +11,7 @@ from web.serializers.waybill import WaybillSerializer
 
 
 class CourierFilter(filters.FilterSet):
-    hub = filters.NumberFilter(field_name="hub", lookup_expr="eq")
+    hub = filters.NumberFilter(field_name="hub__id")
 
     class Meta:
         model = Courier

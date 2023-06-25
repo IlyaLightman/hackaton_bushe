@@ -17,7 +17,8 @@ const useSelected = () => {
 }
 
 export const findSelectedItemIndex = (items, selectedItem) => {
-	return items.findIndex(item => item.id === selectedItem)
+	console.log(items)
+	return items?.findIndex(item => item.id === selectedItem)
 }
 
 export default useSelected
