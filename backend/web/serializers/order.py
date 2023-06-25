@@ -3,16 +3,23 @@ from rest_framework import serializers
 from web.models import Order
 
 
-class CreateOrderSerializer(serializers.ModelSerializer):
-    class ProductSerializer(serializers.Serializer):
-        id = serializers.IntegerField()
-        name = serializers.CharField()
+class ProductSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    name = serializers.CharField()
 
+
+class CreateOrderSerializer(serializers.ModelSerializer):
     products = ProductSerializer(many=True)
 
     class Meta:
         model = Order
-        fields = ("products", "weight", "address_lat", "address_lon", "address_string")
+        fields = (
+            "weight",
+            "products",
+            "address_lat",
+            "address_lon",
+            "address_string",
+        )
 
 
 class UpdateOrderSerializer(serializers.ModelSerializer):
@@ -22,6 +29,8 @@ class UpdateOrderSerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
+    products = ProductSerializer(many=True)
+
     class Meta:
         model = Order
         fields = "__all__"

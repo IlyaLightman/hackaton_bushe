@@ -13,7 +13,6 @@ DEBUG = env.bool("APP_DEBUG")
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ORIGIN_ALLOW_ALL = True
 
-# CORS_ALLOW_CREDENTIALS = False
 CORS_ALLOW_HEADERS = [
     "accept",
     "accept-encoding",
@@ -31,31 +30,8 @@ CORS_ALLOW_HEADERS = [
     "origin",
     "Authorization",
     "access-control-allow-methods",
-    "access-control-allow-origin"
+    "access-control-allow-origin",
 ]
-# CORS_ALLOW_METHODS = [
-#     "DELETE",
-#     "GET",
-#     "OPTIONS",
-#     "PATCH",
-#     "POST",
-#     "PUT",
-# ]
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:3000",
-# ]
-
-# CORS_ORIGIN_WHITELIST = [
-#     'http://localhost:3000',
-# ]
-# ALLOWED_HOSTS = [
-#     "*",
-#     "0.0.0.0",
-#     "127.0.0.1",
-#     "localhost",
-# ]
-
-# Application definition
 
 INSTALLED_APPS = [
     "django.contrib.admin",

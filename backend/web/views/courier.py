@@ -1,4 +1,6 @@
-from drf_yasg.utils import no_body, swagger_auto_schema
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import Http404
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -15,11 +17,12 @@ class CourierViewSet(viewsets.ModelViewSet):
         mapping = {
             "list": CourierSerializer,
             "retrieve": CourierSerializer,
+            "waybill": WaybillSerializer,
         }
 
         return mapping.get(self.action, CourierSerializer)
 
-    @swagger_auto_schema(request_body=no_body)
+    @swagger_auto_schema()
     @action(
         detail=True,
         methods=["get"],
@@ -28,10 +31,13 @@ class CourierViewSet(viewsets.ModelViewSet):
     )
     def waybill(self, request, telegram_id):
         courier = Courier.objects.get(telegram_id=telegram_id)
-        waybill = Waybill.objects.get(
-            courier=courier.id,
-            status=WaybillStatusChoices.in_progress,
-        )
+        try:
+            waybill = Waybill.objects.get(
+                courier=courier.id,
+                status=WaybillStatusChoices.in_progress,
+            )
+        except ObjectDoesNotExist:
+            raise Http404
 
         waybill_serialized = WaybillSerializer(waybill)
         return Response(waybill_serialized.data)
