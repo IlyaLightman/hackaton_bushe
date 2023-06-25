@@ -57,9 +57,9 @@ class Command(BaseCommand):
             Courier(
                 hub=hub,
                 name=self.faker.person.full_name(),
-                status=self.faker.random.choice(CourierStatusChoices.names),
+                status=CourierStatusChoices.free if i % 2 == 0 else CourierStatusChoices.busy,
             )
-            for _ in range(3)
+            for i in range(3)
         )
 
     def _create_orders(self):
