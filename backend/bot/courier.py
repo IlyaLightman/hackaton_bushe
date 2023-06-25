@@ -52,23 +52,36 @@ async def set_order_status(c: CallbackQuery, button: Button, manager: DialogMana
     await fetch('patch', f'{API_ROOT}/orders/{order_id}', payload={'status': status})
     await manager.switch_to(MainSG.root)
 
+
 status_label = {
     'picked': '🚚',
     'delivered': '✅',
     'canceled': '❌',
 }
 
+
 async def orders_getter(dialog_manager: DialogManager, **kwargs):
     waybill_id = dialog_manager.current_context().dialog_data['waybill_id']
     waybill = await fetch('get', f'{API_ROOT}/waybills/{waybill_id}')
     orders = waybill['orders']
+    await try_complete_waybill(orders, dialog_manager)
     for order in orders:
         order['label'] = f'{status_label[order["status"]]}'
     return dict(orders=orders)
 
-async def order_details_getter(dialog_manager: DialogManager,**kwargs):
+
+async def try_complete_waybill(orders, dialog_manager: DialogManager):
+    if any([o['status'] == 'picked' for o in orders]):
+        return
+    waybill_id = dialog_manager.current_context().dialog_data['waybill_id']
+    await fetch('patch', f'{API_ROOT}/waybills/{waybill_id}', payload={'status': 'completed'})
+    dialog_manager.current_context().dialog_data.clear()
+    await dialog_manager.switch_to(MainSG.root)
+
+
+async def order_details_getter(dialog_manager: DialogManager, **kwargs):
     order_id = dialog_manager.current_context().dialog_data['order_id']
-    waybill = await fetch('get',  f'{API_ROOT}/order/{order_id}')
+    waybill = await fetch('get', f'{API_ROOT}/order/{order_id}')
     orders = waybill['orders']
 
     return dict(orders=orders)
