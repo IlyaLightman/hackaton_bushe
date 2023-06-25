@@ -91,7 +91,7 @@ class Command(BaseCommand):
     def _create_waybills(self):
         for idx, (courier, status) in enumerate(zip(Courier.objects.all(), WaybillStatusChoices.names)):
             instance = Waybill.objects.create(
-                number=f"Заказ №1432-{idx + 1}",
+                number=f"Маршрут №1432-{idx + 1}",
                 status=WaybillStatusChoices.created,
                 courier=courier,
             )
