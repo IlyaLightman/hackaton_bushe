@@ -6,12 +6,12 @@ import useItems from './useItems'
 import HubList from '../HubList/HubList'
 
 const mapItemsToCouriers = items =>
-	items.map(({ id, name, distance_progress, time_progress, current_waybill, status }) => ({
+	items.map(({ id, name, distance_progress, time_progress, waybill, status }) => ({
 		id,
 		title: name,
 		description: `${distance_progress}, ${time_progress}`,
-		statusTitle: status === 'busy' ? current_waybill : 'Свободен',
-		statusType: status === 'busy' ? 'process' : 'success'
+		statusTitle: status == 'busy' ? waybill : 'Свободен',
+		statusType: status == 'busy' ? 'process' : 'success'
 	}))
 
 const Couriers = ({ hubId, selectedItem, onSelect }) => {

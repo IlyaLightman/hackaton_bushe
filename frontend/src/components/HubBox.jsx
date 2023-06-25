@@ -22,10 +22,10 @@ const HubBox = ({ index, hub }) => {
 
 	return (
 		<StyledHubCard onClick={handleClick}>
-			<CardMedia component='img' height='160' image={bushe_images[index]} />
+			<CardMedia component='img' height='160' image={hub.logo} />
 			<CardContent>
 				<Typography variant='h6'>{hub.name}</Typography>
-				<Typography variant='caption'>{hub.address}</Typography>
+				<Typography variant='caption'>{hub.address_string}</Typography>
 			</CardContent>
 		</StyledHubCard>
 	)

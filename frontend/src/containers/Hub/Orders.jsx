@@ -2,6 +2,7 @@ import React from 'react'
 
 import HubList from '../HubList/HubList'
 import { findSelectedItemIndex } from './useSelected'
+import useItems from './useItems'
 
 const getOrdersItems = hubId => {
 	return [
@@ -29,18 +30,50 @@ const getOrdersItems = hubId => {
 	]
 }
 
+const ordersFrontStatuses = {
+	created: {
+		title: 'Создан',
+		type: 'disable'
+	},
+	picked: {
+		title: 'Маршрут 2',
+		type: 'process'
+	},
+	canceled: {
+		title: 'Отменён',
+		type: 'error'
+	},
+	delivered: {
+		title: 'Доставлен',
+		type: 'success'
+	}
+}
+
+const mapItemsToOrders = items =>
+	items.map(({ id, number, address_string, waybill, status }) => ({
+		id,
+		title: number,
+		description: address_string,
+		statusTitle: status !== 'picked' ? ordersFrontStatuses[status].title : waybill,
+		statusType: ordersFrontStatuses[status].type
+	}))
+
 const Orders = ({ hubId, selectedItem, onSelect }) => {
-	const orders = getOrdersItems(hubId)
+	const orders = useItems(hubId, 'orders')
 	const selectedItemIndex = findSelectedItemIndex(orders, selectedItem)
 
 	return (
-		<HubList
-			items={orders}
-			selectedItemIndex={selectedItemIndex}
-			onClick={onSelect}
-			firstColumnWidth={3}
-			withCreate
-		/>
+		<>
+			{orders && (
+				<HubList
+					items={mapItemsToOrders(orders)}
+					selectedItemIndex={selectedItemIndex}
+					onClick={onSelect}
+					firstColumnWidth={3}
+					withCreate
+				/>
+			)}
+		</>
 	)
 }
 

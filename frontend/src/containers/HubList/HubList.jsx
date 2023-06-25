@@ -35,7 +35,7 @@ const StatusTag = ({ title, type }) => {
 	return (
 		<Stack direction='row' alignItems='center' spacing={1}>
 			{getStatusIconByType(type, color)}
-			<Typography variant='body1' sx={{ color }}>
+			<Typography variant='body1' sx={{ color, userSelect: 'none' }}>
 				{title}
 			</Typography>
 		</Stack>
@@ -80,7 +80,7 @@ const HubListItem = ({
 					</Typography>
 				</Grid>
 				<Grid item xs={20 - 6 - firstColumnWidth}>
-					<Typography variant='body1' sx={{ color: blueGrey['300'] }}>
+					<Typography variant='body1' sx={{ color: blueGrey['300'], userSelect: 'none' }}>
 						{description}
 					</Typography>
 				</Grid>

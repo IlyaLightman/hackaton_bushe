@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { Grid } from '@mui/material'
 
@@ -6,21 +6,24 @@ import HubBox from '../../components/HubBox'
 import useHttp from '../../hooks/http.hook'
 
 const Home = () => {
+	const [hubs, setHubs] = useState([])
 	const { request } = useHttp()
 
 	useEffect(() => {
 		const fetchHubs = async () => {
 			const data = await request('/hubs/')
+			setHubs(data)
 		}
 		fetchHubs()
 	}, [request])
 
-	const hubs = [
-		{ id: 1, name: '1231', address: '123' },
-		{ id: 2, name: '4562', address: '456' },
-		{ id: 3, name: '1233', address: '123' },
-		{ id: 4, name: '4564', address: '456' }
-	]
+	// const hubs = [
+	// 	{ id: 1, name: '1231', address: '123' },
+	// 	{ id: 2, name: '4562', address: '456' },
+	// 	{ id: 3, name: '1233', address: '123' },
+	// 	{ id: 4, name: '4564', address: '456' }
+	// ]
+	console.log(hubs)
 
 	return (
 		<Grid container columns={3}>
