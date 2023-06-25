@@ -45,7 +45,7 @@ class Courier(models.Model):
     status = models.CharField(max_length=255, choices=CourierStatusChoices.choices)
     telegram_id = models.CharField(max_length=255, null=True)
     hub = models.ForeignKey("Hub", on_delete=models.RESTRICT)
-    
+
     @property
     def waybill(self):
         result = Waybill.objects.filter(courier=self).first()
@@ -63,6 +63,11 @@ class Order(models.Model):
     address_lon = models.FloatField()
     customer_name = models.CharField(max_length=255)
     customer_phone = models.CharField(max_length=255)
+
+    @property
+    def waybill(self):
+        result = Waybill.objects.filter(orders__order=self).first()
+        return result.number if result else "Нет"
 
 
 class OrderHistory(models.Model):

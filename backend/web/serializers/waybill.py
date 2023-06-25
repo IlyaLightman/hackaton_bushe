@@ -10,9 +10,6 @@ class WaybillOrderSerializer(serializers.Serializer):
     order_number = serializers.IntegerField()
 
 
-from web.serializers.order import OrderSerializer
-
-
 class WaybillSerializer(serializers.ModelSerializer):
     orders = WaybillOrderSerializer(many=True)
     courier = CourierSerializer()

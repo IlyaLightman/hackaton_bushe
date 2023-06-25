@@ -30,6 +30,7 @@ class UpdateOrderSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     products = ProductSerializer(many=True)
+    waybill = serializers.CharField()
 
     class Meta:
         model = Order

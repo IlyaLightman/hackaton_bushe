@@ -13,7 +13,7 @@ from web.models import (
     OrderHistoryEventChoices,
     OrderStatusChoices,
     Waybill,
-    WaybillStatusChoices,
+    WaybillOrder, WaybillStatusChoices,
 )
 
 
@@ -95,4 +95,12 @@ class Command(BaseCommand):
                 number=f"Маршрут {idx + 1}",
                 status=WaybillStatusChoices.created,
                 courier=courier,
+            )
+
+            WaybillOrder.objects.bulk_create(
+                WaybillOrder(
+                    waybill=instance,
+                    order=order,
+                    order_number=number
+                ) for number, order in enumerate(Order.objects.all())
             )
